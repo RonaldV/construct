@@ -91,6 +91,11 @@ namespace Construct
 
         public ContainerBuilder(Container container)
         {
+            if (container == null)
+            {
+                throw new ArgumentNullException("container");
+            }
+
             this.container = container;
             registrations = new List<IRegistrationInfo>();
         }
@@ -137,6 +142,11 @@ namespace Construct
         public IRegistration Register<T>(Func<T> createInstance)
             where T : class
         {
+            if (createInstance == null)
+            {
+                throw new ArgumentNullException("createInstance");
+            }
+
             var registration = new Registration<T>(createInstance);
             registrations.Add(registration);
             return registration;
@@ -191,6 +201,11 @@ namespace Construct
 
         public IContainerBuilder Configure(Action<IContainerBuilder, IContainer> configuration)
         {
+            if (configuration == null)
+            {
+                throw new ArgumentNullException("configuration");
+            }
+
             var builder = new ContainerBuilder(this);
             configuration(builder, this);
 
@@ -204,6 +219,11 @@ namespace Construct
 
         public object Resolve(Type type)
         {
+            if (type == null)
+            {
+                throw new ArgumentNullException("type");
+            }
+
             lock (sync)
             {
                 if (registrations.ContainsKey(type))
