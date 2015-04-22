@@ -19,8 +19,24 @@ See for example the following issues:
 - Only basic features
   - Single instance registration
   - Instance per dependency (also known as transient) registration
+  - Only constructor injection
 - You'll need to register in the correct order of dependencies
 
 If you're in need of a full featured IoC container I would recommend [Autofac](http://autofac.org/) or [StructureMap](http://docs.structuremap.net/).
 
-(A manual for using it is on the way.)
+## Manual
+    // Declare the container in the class that starts the application.
+    // For example in a console application you should declare it in the Program class.
+    // In Xamarin Forms you should declare it in the App class.
+    container = new Container ().Configure ((builder, context) => {
+        // Register an instance per dependency
+        builder.Register <SomeViewModel> ();
+        // Register an instance per dependency by its interface
+        builder.Register <SomeService> ().As<ISomeService> ();
+        // Register a single instance
+        builder.Register <SingleService> ().SingleInstance ();
+        // Register a single instance by its interface
+        builder.Register <Single2Service> ().As<ISomeService> ().SingleInstance ();
+        // For registering a single instance or an instance per dependency with a parameter not registered in the container
+        builder.Register (() => new SomeOtherService ("A setting")); // For further configuration see previous examples
+    }).Build ();
