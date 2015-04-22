@@ -17,6 +17,8 @@ See for example the following issues:
 
 ## Disadvantages (at the moment)
 - Only basic features
+  - Single instance registration
+  - Instance per dependency (also known as transient) registration
 - You'll need to register in the correct order of dependencies
 
 If you're in need of a full featured IoC container I would recommend [Autofac](http://autofac.org/) or [StructureMap](http://docs.structuremap.net/).
