@@ -25,6 +25,11 @@ See for example the following issues:
 If you're in need of a full featured IoC container I would recommend [Autofac](http://autofac.org/) or [StructureMap](http://docs.structuremap.net/).
 
 ## How to use
+
+You can copy paste the Construct.cs file in the project you want to use it or in the future there will be a nuget package available.
+
+### Code example
+
     // Declare the container in the class that starts the application.
     // For example in a console application you should declare it in the Program class.
     // In Xamarin Forms you should declare it in the App class.
