@@ -103,10 +103,11 @@ namespace Construct
 
         private ParameterInfo[] GetParameterInfos(Type type)
         {
-#if NOT_RUNNING_ON_4
-            var constructors = type.GetTypeInfo().DeclaredConstructors;
+#if NETFX_40 || NETFX_35 || NETFX_30
+            // Use next line when using .NET framework 4 or lower
+            var constructors = type.GetConstructors();
 #else
-            var constructors = type.GetType().GetConstructors();
+            var constructors = type.GetTypeInfo().DeclaredConstructors;
 #endif
             var parameterInfos = default(ParameterInfo[]);
             var parameters = default(ParameterInfo[]);
